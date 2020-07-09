@@ -13,7 +13,24 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'failed'        => 'These credentials do not match our records.',
+    'throttle'      => 'Too many login attempts. Please try again in :seconds seconds.',
+    'token_expired' => 'Your session is expired. Please try again.',
+    'noaccount'     => 'Don\'t have an account? Register',
+    'account'       => 'Already an account? Login',
+    'submit'        => 'Submit',
+    'firstname'     => 'Firstname',
+    'lastname'      => 'Lastname',
+    'email'         => 'E-mail address',
+    'password'      => 'Password',
+    'tags'          => 'traits',
+    'confirm'       => 'Confirm password',
+    'tagplaceholder'=> 'Create a trait or add one',
+    'nobuddy'       => 'I\'m looking for a buddy',
+    'buddy'         => 'I want to be a buddy',
+    'year'          => 'Year',
+    'yearstandard'  => 'I\'m in ...',
+    'warningnobuddy'=> 'Best look for a buddy',
+    'warningbuddy'  => 'Better be a buddy for the freshmen',
+    'emailError'    => 'This is not a school email address!',
 ];

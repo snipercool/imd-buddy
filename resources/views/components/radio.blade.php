@@ -1,0 +1,1 @@
+<label class="form-check"> {!! Form::radio($label, $value ) !!} {{$placeholder}} </label>
