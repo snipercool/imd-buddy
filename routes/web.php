@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,14 +26,14 @@ Route::group([  'prefix' => '{locale}',
 {
     route::get('/', function()
     {
-        return view('welcome');
-    })->name('welcome');;
+        return view('home');
+    })->name('home');;
+
+    Route::get('/home', 'Homecontroller@index');
 
     Auth::routes();
 
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    Route::get('/Profile', 'Usercontroller@profile')->name('profile');
+    Route::get('/Profile', 'Usercontroller@profile')->middleware('verified')->name('profile');
 
     Route::get('/settings', 'HomeController@settings')->name('settings');
 });

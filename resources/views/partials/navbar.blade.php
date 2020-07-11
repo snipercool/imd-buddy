@@ -17,7 +17,7 @@
                 <div class="rounded-circle overflow-hidden ml-4" style="width: 40px;">
                 <img src="{{Auth::user()->avatar}}" alt="avatar" height="40">
                 </div>
-                <span class="link-text">{{trans('app.welcome')}} {{Auth::user()->firstname}} </span>
+                <span class="link-text">{{trans('app.welcome')}} {{Auth::user()->name}} </span>
             </a>
         </li>
         @endif

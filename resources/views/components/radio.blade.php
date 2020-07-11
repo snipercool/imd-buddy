@@ -1,1 +1,1 @@
-<label class="form-check"> {!! Form::radio($label, $value ) !!} {{$placeholder}} </label>
+<label class="form-check text-left"> {!! Form::radio($label, $value ) !!} {{$placeholder}} </label>

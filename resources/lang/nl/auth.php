@@ -32,6 +32,7 @@ return [
     'yearstandard'  => 'Ik zit in ...',
     'warningnobuddy'=> 'Best een buddy zoeken',
     'warningbuddy'  => 'Best een buddy zijn voor 1ste jaars',
-    'emailError'    => 'Dit is geen school mailadres!'
-
+    'remember'      => 'Herinner mij',
+    'forgot'        => 'Wachtwoord vergeten?',
+    'file'          => 'Bestand kiezen',
 ];
