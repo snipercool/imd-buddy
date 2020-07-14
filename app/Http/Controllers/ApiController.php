@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TagModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 use function PHPSTORM_META\map;
 
@@ -32,6 +33,7 @@ class ApiController extends Controller
     }
     public function createTags(Request $request)
     {
+
         $value = $request->get('value');
         if ($value != '') {
            TagModel::create(['name' => $value]);

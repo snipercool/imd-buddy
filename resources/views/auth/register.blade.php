@@ -81,9 +81,9 @@
             <div class="form-group my-3">
                 <div class="col-md-12 text-left">
                     <input type="radio" id="no-buddy" name="buddy" value="0" checked>
-                    <label for="no-buddy">Ik zoek een buddy</label><br>
+                    <label for="no-buddy">{{__('auth.nobuddy')}}</label><br>
                     <input type="radio" id="buddy" name="buddy" value="1">
-                    <label for="buddy">Ik ben een buddy</label><br>
+                    <label for="buddy">{{__('auth.buddy')}}</label><br>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
                 <label for="password" class="col-md-12 text-md-left">{{ __('auth.password') }}</label>
 
                 <div class="col-md-12">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="***********" name="password" required autocomplete="new-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="••••••••" name="password" required autocomplete="new-password">
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -106,7 +106,7 @@
                 <label for="password-confirm" class="col-md-12 text-md-left">{{ __('auth.confirm') }}</label>
 
                 <div class="col-md-12">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="***********" required autocomplete="new-password">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="••••••••" required autocomplete="new-password">
                 </div>
             </div>
 

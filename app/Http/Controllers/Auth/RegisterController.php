@@ -54,7 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'ends_with:student.thomasmore.be,thomasmore.be', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255','starts_with:r0', 'ends_with:student.thomasmore.be,thomasmore.be', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'year' => ['required'],
             'buddy' => ['required'],
@@ -81,7 +81,7 @@ class RegisterController extends Controller
         if (request()->hasFile('avatar')) {
             $avatar = request()->file('avatar')->getClientOriginalName();
             request()->file('avatar')->storeAs('uploads', $user->id . '/' . $avatar, '');
-            $user->update(['avatar' => 'storage/uploads/' . $user->id . '/' . $avatar . '']);
+            $user->update(['avatar' => '/storage/uploads/' . $user->id . '/' . $avatar . '']);
         }
 
         //processing skillsArray
