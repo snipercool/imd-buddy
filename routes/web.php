@@ -24,10 +24,7 @@ Route::group([  'prefix' => '{locale}',
                 'middleware' => 'setlocale',
             ], function()
 {
-    route::get('/', function()
-    {
-        return view('home');
-    })->name('home');;
+    route::get('/', 'Homecontroller@index')->name('home');
 
     Route::get('/home', 'Homecontroller@index');
 
