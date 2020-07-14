@@ -83,6 +83,7 @@ return [
         'string'  => ':Attribute moet :size karakters zijn.',
         'array'   => ':Attribute moet :size items bevatten.',
     ],
+    'starts_with'          => 'Uw :attribute moet beginnen met :values.',
     'string'               => 'Dit veld moet een tekenreeks zijn.',
     'timezone'             => 'Dit veld moet een geldige tijdzone zijn.',
     'unique'               => 'Dit veld is al in gebruik.',

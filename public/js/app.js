@@ -37917,6 +37917,8 @@ __webpack_require__(/*! ./year */ "./resources/js/year.js");
 
 __webpack_require__(/*! ./email */ "./resources/js/email.js");
 
+__webpack_require__(/*! ./update */ "./resources/js/update.js");
+
 /***/ }),
 
 /***/ "./resources/js/autocomplete.js":
@@ -38076,6 +38078,17 @@ $("input[name='email']").keyup(function () {
     $('#emailError').removeClass('d-none');
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/update.js":
+/*!********************************!*\
+  !*** ./resources/js/update.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

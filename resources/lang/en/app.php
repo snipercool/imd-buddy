@@ -21,5 +21,7 @@ return [
     'logout'        => 'Log out',
     'lang'          => 'Language',
     'welcome'       => 'Welcome, ',
-    'skills'        => 'You need at least 5 features.'
+    'skills'        => 'You need at least 5 features.',
+    'hi'            => 'Hi',
+    'allusers'      => 'These are all users',
 ];

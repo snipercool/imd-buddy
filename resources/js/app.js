@@ -8,3 +8,5 @@ require('./createSkill');
 require('./year');
 
 require('./email');
+
+require('./update');
