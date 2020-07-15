@@ -37,7 +37,11 @@
                 <input type="hidden" name="surname" value="{{$user->surname}}">
                 <button type="submit" class="btn btn-primary">{{__('profile.goProfile')}}</button>
                 </form>
-                <a href="#" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                @if(!$user->friends()->count())
+                    <a href="#" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                @else
+                    <button type="button" class="btn btn-secondary text-left" disabled>{{__('app.alreadyBuddy')}}</button>
+                @endif
             </div>
             </div>
         </div>

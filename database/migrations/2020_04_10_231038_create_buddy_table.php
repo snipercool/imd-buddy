@@ -17,6 +17,8 @@ class CreateBuddyTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('buddy_id');
+            $table->boolean('accepted');
+            $table->boolean('tries');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -37,13 +37,29 @@
                             @endphp
                         </div>
                         <div>
+                            @if(!$user->friends()->count())
                             <a href="#" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                            @else
+                            <button type="button" class="btn btn-secondary" disabled>{{__('app.alreadyBuddy')}}</button>
+                            @endif
                         </div>
                     </div>
                     <div class="text-center text-sm-right">
                         <div class="text-muted"><small>{{__('profile.joined')}} {{$created}}</small></div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <h4 class="text-primary">{{$user->name}}&lpar;'s&rpar; friends:</h4>
+                @if(!$user->friends()->count())
+                <div class="alert alert-info w-50" role="alert">
+                    {{__('app.noBuddyYet')}}
+                </div>
+                @else
+                <div class="alert alert-info w-50" role="alert">
+                    {{__('app.userbuddy')}} {{$user->friends()->first()->name}} {{$user->friends()->first()->surname}}
+                </div>
+                @endif
             </div>
         </div>
     </div>

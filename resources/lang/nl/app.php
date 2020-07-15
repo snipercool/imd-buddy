@@ -29,4 +29,7 @@ return [
     'results'       => 'Resultaten',
     'no_users'      => 'Geen buddies gevonden met deze naam',
     'sendRequest'   => 'Stuur een buddy verzoek',
+    'alreadyBuddy'  => 'Deze gebruiker heeft al een buddy',
+    'noBuddyYet'    => 'Deze gebruiker heeft nog geen buddy',
+    'userbuddy'     => 'Deze gebruiker is een buddy met',
 ];
