@@ -84,7 +84,8 @@ class RegisterController extends Controller
             $user->update(['avatar' => 'storage/uploads/' . $user->id . '/' . $avatar . '']);
         }
 
-        //processing skillsArray
+        if (request()->has('types')) {
+           //processing skillsArray
         $RawSkillsArray = request('types');
         $RawSkillsArray = explode(', ', $RawSkillsArray);
 
@@ -99,6 +100,8 @@ class RegisterController extends Controller
                 'tag_id' => $tag->id
             ]);
         };
+        }
+        
 
         return $user;
     }
