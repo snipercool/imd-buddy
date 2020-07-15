@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use App\TagModel;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,15 +26,22 @@ Route::group([  'prefix' => '{locale}',
                 'middleware' => 'setlocale',
             ], function()
 {
+
     route::get('/', 'Homecontroller@index')->name('home');
 
     Route::get('/home', 'Homecontroller@index');
 
     Auth::routes();
 
-    Route::get('/Profile', 'Usercontroller@profile')->middleware('verified')->name('profile');
+    Route::get('/profile', 'ProfileController@profile')->middleware('auth')->name('profile');
 
-    Route::get('/settings', 'HomeController@settings')->name('settings');
+    Route::get('/updatepassword', 'ProfileController@PasswordPage')->middleware('auth')->name('updatepassword');
+
+    Route::post('/updatepassword', 'ProfileController@updatePassword')->name('updatepassword');
+
+    Route::post('/updateimage', 'ProfileController@UpdateImage')->name('updateimage');
+
+    Route::post('/profile', 'ProfileController@update')->name('profile');
 });
 
 

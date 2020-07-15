@@ -40,6 +40,45 @@ class tagSeeder extends Seeder
             [
                 'name'       => 'javascript',
             ],
+            [
+                'name'       => 'photography',
+            ],
+            [
+                'name'       => 'gaming',
+            ],
+            [
+                'name'       => 'sports',
+            ],
+            [
+                'name'       => 'fitness',
+            ],
+            [
+                'name'       => 'javascript',
+            ],
+            [
+                'name'       => 'memelord',
+            ],
+            [
+                'name'       => 'vlogger',
+            ],
+            [
+                'name'       => 'youtuber',
+            ],
+            [
+                'name'       => 'blogger',
+            ],
+            [
+                'name'       => 'animal lover',
+            ],
+            [
+                'name'       => 'wizard',
+            ],
+            [
+                'name'       => 'reading',
+            ],
+            [
+                'name'       => 'Comic sans',
+            ],
 
         ]);
     }
