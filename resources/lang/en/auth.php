@@ -36,4 +36,5 @@ return [
     'remember'      => 'Remember me',
     'forgot'        => 'Forgot your password?',
     'file'          => 'Choose file',
+    'isin'          => 'Zit in',
 ];

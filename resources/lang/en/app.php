@@ -24,4 +24,9 @@ return [
     'skills'        => 'You need at least 5 features.',
     'hi'            => 'Hi',
     'allusers'      => 'These are all users',
+    'search'        => 'Search for a buddy',
+    'searchError'   => 'Fill in the searchbar with at least a firstname',
+    'results'       => 'Results',
+    'no_users'      => 'No buddies found with this name',
+    'sendRequest'   => 'Send a buddy request',
 ];

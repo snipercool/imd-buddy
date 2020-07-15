@@ -26,22 +26,7 @@ Route::group([  'prefix' => '{locale}',
                 'middleware' => 'setlocale',
             ], function()
 {
-    route::get('/', function()
-    {
-        if (Auth::guest()) {
-            $data =  User::all();
-        }
-        else {
-             if (Auth::user()->buddy  == 0) {
-                $data = User::where('buddy', 1)->get();
-             }
-             else {
-                $data = User::where('buddy', 0)->get();
-             }
-         }
-
-        return view('home', ['data' => $data]);
-    })->name('home');
+    route::get('/', 'Homecontroller@index')->name('home');
 
     Route::get('/home', 'Homecontroller@index');
 
@@ -51,11 +36,15 @@ Route::group([  'prefix' => '{locale}',
 
     Route::get('/updatepassword', 'ProfileController@PasswordPage')->middleware('auth')->name('updatepassword');
 
+    Route::get('/search', 'SearchController@getResults')->name('search');
+
     Route::post('/updatepassword', 'ProfileController@updatePassword')->name('updatepassword');
 
     Route::post('/updateimage', 'ProfileController@UpdateImage')->name('updateimage');
 
     Route::post('/profile', 'ProfileController@update')->name('profile');
+
+    Route::get('/user', 'ProfileController@userProfile')->name('userprofile');
 });
 
 

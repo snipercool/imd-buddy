@@ -14,41 +14,20 @@
     @elseif (Auth::user()->buddy == 1)
     <h1 class='text-primary'>{{__('app.hi')}}, {{__('auth.nobuddy')}}</h1>
     @endif
-    @foreach($data->sortBy('created_at') as $user)
-    <div class="col-md-4 card border-0 d-inline-block mr-2" style='background: #E0F2F9'>
-        <div class="card-body rounded px-2">
-            <div class="mx-auto rounded-circle" style="height: 140px; width: 140px; background-image: url({{$user->avatar}}); background-size:cover;">
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="text-center mt-2"><strong>{{$user->name}} {{$user->surname}}</strong></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 mx-auto">
-                    <p>{{$user->year}} IMD</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 mx-auto">
-                    @php
-                        $skills = DB::table('user_tags')->where('user_id', $user->id)->get()
-                        ->map(function ($tags) {
-                            return [
-                                'id' => $tags->id,
-                                'value' => $tags->tag_id,
-                            ];
-                        });
-                    foreach ($skills as $tag => $value)
-                          $tags[] = Db::table('tags')->where('id', $value)->first();
-                    foreach ($tags as $tag){
-                        echo $tag->name . ', ';
-                    }
-                    @endphp
-                </div>
-            </div>
-        </div>
+    @if(Session::has('searchError'))
+    <div id="searchError" class="my-2 mx-0 w-50 alert alert-danger">
+        {{__('app.searchError')}}.
     </div>
+    @endif
+    <form action="{{ route('search', app()->getLocale()) }}" role="search">
+        <div class="form-group d-inline-block">
+            <input type="search" name="search" class="form-control" placeholder="{{__('app.search')}}">
+        </div>
+        <button type="submit" class="btn btn-primary ml-2">{{__('auth.submit')}}</button>
+    </form>
+
+    @foreach($data->sortBy('created_at') as $user)
+        @include('partials.usercard')
     @endforeach
 </div>
 

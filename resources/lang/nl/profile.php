@@ -27,5 +27,7 @@ return [
     'SameError'     => 'Huidig en nieuw wachtwoord mogen niet overeenkomen.',
     'NewSameError'  => 'Nieuw wachtwoord en bevestiging komen niet overeen.',
     'changedPass'   => 'Wachtwoord verandert',
+    'goProfile'     => 'Ga naar profiel',
+    'loves'         => 'Houdt van',
 
 ];
