@@ -40,7 +40,7 @@ class ProfileController extends Controller
         foreach ($data as $tag => $value) {
             $tags[] = TagModel::where('id', $value)->first();
         }
-        return view('profile', compact('created', 'tags'));
+        return view('profile.profile', compact('created', 'tags'));
     }
 
     public function getTags()
@@ -70,12 +70,11 @@ class ProfileController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => [ 'string', 'max:255'],
-            'surname' => [ 'string', 'max:255'],
-            'email' => [ 'string', 'email', 'max:255', 'starts_with:r0', 'ends_with:student.thomasmore.be,thomasmore.be', 'unique:users'],
-            'password' => [ 'string', 'min:8', 'confirmed'],
+            'name' => ['string', 'max:255'],
+            'surname' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', 'starts_with:r0', 'ends_with:student.thomasmore.be,thomasmore.be', 'unique:users'],
+            'password' => ['string', 'min:8', 'confirmed'],
         ]);
-
     }
 
     protected function UpdateImage()
@@ -86,26 +85,21 @@ class ProfileController extends Controller
 
 
         if (request()->hasFile('avatar')) {
-            if (Str::contains($filetype[1], ['jpg','gif','png','jpeg'])) {
+            if (Str::contains($filetype[1], ['jpg', 'gif', 'png', 'jpeg'])) {
                 $avatar = request()->file('avatar')->getClientOriginalName();
                 request()->file('avatar')->storeAs('uploads', Auth::user()->id . '/' . $avatar, '');
                 User::where('id', Auth::user()->id)->update(['avatar' => '/storage/uploads/' . Auth::user()->id . '/' . $avatar . '']);
 
-                Session::flash('success', "done");
-                return redirect()->back();
+                return redirect()->back()->with('success', 'done!');
+            } else {
+                return redirect()->back()->with('error', 'Error!');
             }
-            else {
-                Session::flash('error', "error");
-                return redirect()->back();
-            }
-
         }
-
     }
 
     protected function update()
-    {   
-        
+    {
+
         if (request()->has('name')) {
             User::where('id', Auth::user()->id)->update(['name' => request('name')]);
         }
@@ -123,7 +117,7 @@ class ProfileController extends Controller
         }
 
         if (request()->has('types')) {
-           //processing skillsArray
+            //processing skillsArray
             $RawSkillsArray = request('types');
             $RawSkillsArray = explode(', ', $RawSkillsArray);
 
@@ -151,35 +145,45 @@ class ProfileController extends Controller
     {
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             // The passwords matches
-            Session::flash('CurrentError', "error");
-            return redirect()->back();
+            return redirect()->back()->with('CurrentError', 'Error!');
         }
 
-        if($request->get('current-password') == $request->get('new-password')){
+        if ($request->get('current-password') == $request->get('new-password')) {
             //Current password and new password are same
-            Session::flash('SameError', "error");
-            return redirect()->back();
+            return redirect()->back()->with('SameError', 'Error!');
         }
 
         if ($request->get('new-password_confirmation') != $request->get('new-password')) {
             //Confirm new password and new password are same
-            Session::flash('NewSameError', "error");
-            return redirect()->back();
+            return redirect()->back()->with('NewSameError', 'Error!');
         }
 
         $validatedData = $request->validate([
             'current-password' => 'required',
             'new-password' => 'required|string|min:8|confirmed',
         ]);
-        
+
         $password = Hash::make($request->get('new-password'));
         User::where('id', Auth::user()->id)->update(['password' => $password]);
-        
-        Session::flash('PasswordChanged', "done");
-        return redirect(app()->getLocale() . '/profile');
 
-
+        return redirect(app()->getLocale() . '/profile')->with('PasswordChanged', 'changed!');
     }
 
+    public function userProfile()
+    {
+        $user = User::where('name', request('name'))
+            ->where('surname', request('surname'))
+            ->first();
 
+        $string = $user->created_at;
+        $s = explode(" ", $string);
+        unset($s[1]);
+        $s = implode(" ", $s);
+        $created =  $s;
+
+        if (!$user) {
+            abort(404);
+        }
+        return view('profile.user')->with(['user' => $user, 'created' => $created]);
+    }
 }

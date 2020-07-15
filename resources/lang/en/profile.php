@@ -27,4 +27,6 @@ return [
     'SameError'     => 'Current and New password can\'t match.',
     'NewSameError'  => 'New Password and Confirm does not match.',
     'changedPass'   => 'Password changed.',
+    'goProfile'     => 'Go to profile',
+    'loves'         => 'Loves',
 ];
