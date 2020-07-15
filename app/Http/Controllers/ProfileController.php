@@ -134,7 +134,7 @@ class ProfileController extends Controller
 
                 //creating skills for user in userTagModel
                 UserTagModel::create([
-                    'user_id' => $user->id,
+                    'user_id' => Auth::user()->id,
                     'tag_id' => $tag->id
                 ]);
             };

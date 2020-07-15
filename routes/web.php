@@ -26,22 +26,8 @@ Route::group([  'prefix' => '{locale}',
                 'middleware' => 'setlocale',
             ], function()
 {
-    route::get('/', function()
-    {
-        if (Auth::guest()) {
-            $data =  User::all();
-        }
-        else {
-             if (Auth::user()->buddy  == 0) {
-                $data = User::where('buddy', 1)->get();
-             }
-             else {
-                $data = User::where('buddy', 0)->get();
-             }
-         }
 
-        return view('home', ['data' => $data]);
-    })->name('home');
+    route::get('/', 'Homecontroller@index')->name('home');
 
     Route::get('/home', 'Homecontroller@index');
 
