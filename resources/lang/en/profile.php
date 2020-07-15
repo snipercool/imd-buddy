@@ -28,5 +28,5 @@ return [
     'NewSameError'  => 'New Password and Confirm does not match.',
     'changedPass'   => 'Password changed.',
     'goProfile'     => 'Go to profile',
-    'loves'         => 'Loves',
+    'notenoughtags' => 'You don\'t have enough tags yet.',
 ];

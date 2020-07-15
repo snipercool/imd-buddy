@@ -5,7 +5,9 @@
 @section('content')
 <div class="col-md-10 mr-3 mt-5" style="margin-left: 7rem; max-width: 900px;">
     @if(Auth::user())
-
+        @if(count($tags) < 5)
+            <div class="alert alert-warning w-50">{{__('profile.notenoughtags')}}</div>
+        @endif
     @endif
     @if(Auth::guest())
     <h1 class='text-primary'>{{__('app.allusers')}}</h1>

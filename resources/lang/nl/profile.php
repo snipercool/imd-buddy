@@ -28,6 +28,6 @@ return [
     'NewSameError'  => 'Nieuw wachtwoord en bevestiging komen niet overeen.',
     'changedPass'   => 'Wachtwoord verandert',
     'goProfile'     => 'Ga naar profiel',
-    'loves'         => 'Houdt van',
+    'notenoughtags' => 'Je hebt nog niet genoeg eigenschappen.',
 
 ];

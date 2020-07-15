@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\TagModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -31,6 +33,21 @@ class HomeController extends Controller
         if (Auth::user()) {
             $data = User::all()->except(Auth::id());
         }
-        return view('home', compact('data'));
+
+        //all user tags
+        $user = Auth::user();
+        $skills = DB::table('user_tags')
+            ->where('user_id', $user->id)
+            ->get()
+            ->map(function ($tags) {
+                return [
+                    'id'      => $tags->id,
+                    'value'   => $tags->tag_id,
+                ];
+            });
+        foreach ($skills as $tag => $value) {
+            $tags[] = TagModel::where('id', $value)->first();
+        }
+        return view('home', compact('data', 'tags'));
     }
 }
