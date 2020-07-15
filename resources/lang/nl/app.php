@@ -21,5 +21,7 @@ return [
     'logout'        => 'Uitloggen',
     'lang'          => 'Taal',
     'welcome'       => 'Welkom, ',
-    'skills'        => 'Je hebt minstens 5 features nodig.'
+    'skills'        => 'Je hebt minstens 5 features nodig.',
+    'hi'            => 'Hey',
+    'allusers'      => 'Dit zijn alle gebruikers',
 ];

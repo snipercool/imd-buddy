@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use App\TagModel;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +28,34 @@ Route::group([  'prefix' => '{locale}',
 {
     route::get('/', function()
     {
-        return view('welcome');
-    })->name('welcome');;
+        if (Auth::guest()) {
+            $data =  User::all();
+        }
+        else {
+             if (Auth::user()->buddy  == 0) {
+                $data = User::where('buddy', 1)->get();
+             }
+             else {
+                $data = User::where('buddy', 0)->get();
+             }
+         }
+
+        return view('home', ['data' => $data]);
+    })->name('home');
+
+    Route::get('/home', 'Homecontroller@index');
 
     Auth::routes();
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/profile', 'ProfileController@profile')->middleware('auth')->name('profile');
 
-    Route::get('/Profile', 'Usercontroller@profile')->name('profile');
+    Route::get('/updatepassword', 'ProfileController@PasswordPage')->middleware('auth')->name('updatepassword');
 
-    Route::get('/settings', 'HomeController@settings')->name('settings');
+    Route::post('/updatepassword', 'ProfileController@updatePassword')->name('updatepassword');
+
+    Route::post('/updateimage', 'ProfileController@UpdateImage')->name('updateimage');
+
+    Route::post('/profile', 'ProfileController@update')->name('profile');
 });
 
 

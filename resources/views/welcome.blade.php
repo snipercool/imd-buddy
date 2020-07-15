@@ -3,5 +3,9 @@
 @include('partials.navbar')
 
 @section('content')
-    @include('auth.auth')
+    @if(Auth::guest())
+        @include('auth.auth')
+    @else
+        @include('auth.logout')
+    @endif
 @endsection

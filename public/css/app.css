@@ -205,6 +205,38 @@ main {
   outline: 0 !important;
 }
 
+.row,
+.row > * {
+  --bs-gutter-x: 0 !important;
+}
+
+.side-left {
+  background: url(/images/bg-auth.jpg?f0a9b543e596308ea2cb2a73f5419a52) rgba(0, 123, 255, 0.3);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  padding: 0 !important;
+  margin-bottom: -10px !important;
+  display: none;
+}
+
+.login-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+@media (min-height: 900px) {
+  .body {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 576px) {
+  .side-left {
+    display: block;
+  }
+}
+
 /*!
  * Bootstrap v5.0.0-alpha1 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

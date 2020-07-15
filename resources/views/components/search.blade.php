@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group text-left">
     <div id="message">
 
     </div>
@@ -10,7 +10,7 @@
         </ul>
     </div>
     <span class="text-muted">{{trans('auth.tags')}}:
-        <span id="traits"><input type="hidden" name="{{$label}}" value="MyLittlePony" id="hiddenTags"></span>
+        <span id="traits"><input type="hidden" name="{{$label}}" value="" id="hiddenTags"></span>
     </span>
 
 </div>

@@ -37909,6 +37909,75 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./autocomplete */ "./resources/js/autocomplete.js");
+
+__webpack_require__(/*! ./createSkill */ "./resources/js/createSkill.js");
+
+__webpack_require__(/*! ./year */ "./resources/js/year.js");
+
+__webpack_require__(/*! ./email */ "./resources/js/email.js");
+
+__webpack_require__(/*! ./update */ "./resources/js/update.js");
+
+/***/ }),
+
+/***/ "./resources/js/autocomplete.js":
+/*!**************************************!*\
+  !*** ./resources/js/autocomplete.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var patt = new RegExp(/(.*)\/(.*)\/(.*)/, 'g');
+var execute = patt.exec(window.location.href);
+var url = (execute && execute.length > 0 ? execute[1] : '') + "/api/autocomplete";
+placement = document.getElementById('suggestions');
+$('#types').keyup(function (e) {
+  var value = $(this).val();
+
+  if (value == '') {
+    $('#suggestions').html('');
+  } else {
+    var _token = window.Laravel.csrfToken;
+    $.ajax({
+      url: url,
+      method: "POST",
+      data: {
+        value: value,
+        _token: _token
+      },
+      success: function success(result) {
+        $('#suggestions').css('display', 'block');
+        $('#message').html('');
+        var option = [];
+
+        for (var i = 0; i < result.length; i++) {
+          option.push("<li for=\"skill\" class=\"list-group-item suggestion-label skill\" value=\"".concat(result[i].value, "\">").concat(result[i].value, "</li>"));
+        }
+
+        option.push("<li id=\"createSkill\" class=\"list-group-item suggestion-label\" ><i class=\"fa fa-plus\"></i> Add new skill</li>");
+        placement.innerHTML = option.join('');
+      }
+    });
+    e.preventDefault();
+  }
+});
+$(document).on('click', '.skill', function (e) {
+  $('#message').html('<div class="alert alert-success text-left" role="alert">Tag Added</div>');
+  $('#types').val('');
+  console.log($('#traits').text());
+
+  if ($('#traits').text().length == 0) {
+    $('#traits').append($(this).text()).show();
+  } else {
+    $('#traits').append(', ' + $(this).text()).show();
+  }
+
+  $('#hiddenTags').val($('#traits').text());
+  $('#suggestions').css('display', 'none');
+  e.preventDefault();
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37953,6 +38022,99 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/createSkill.js":
+/*!*************************************!*\
+  !*** ./resources/js/createSkill.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var patt = new RegExp(/(.*)\/(.*)\/(.*)/, 'g');
+var execute = patt.exec(window.location.href);
+var url = (execute && execute.length > 0 ? execute[1] : '') + "/api/createtags";
+$(document).on('click', '#createSkill', function (e) {
+  var value = $('#types').val();
+  var _token = window.Laravel.csrfToken;
+  $.ajax({
+    url: url,
+    method: "POST",
+    data: {
+      value: value,
+      _token: _token
+    },
+    success: function success(result) {
+      $('#types').val('');
+      $('#traits').append(value + ',').show();
+      console.log(result['success']);
+      console.log('this logged');
+      $('#message').html(result['success']);
+    },
+    error: function error(result) {
+      $('#message').html(result['error']);
+    }
+  });
+  e.preventDefault();
+});
+
+/***/ }),
+
+/***/ "./resources/js/email.js":
+/*!*******************************!*\
+  !*** ./resources/js/email.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$("input[name='email']").keyup(function () {
+  var value = $(this).val();
+  console.log(value);
+
+  if (value.includes('@student.thomasmore.be') || value.length == 0) {
+    $('#emailError').addClass('d-none');
+  } else {
+    $('#emailError').removeClass('d-none');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/update.js":
+/*!********************************!*\
+  !*** ./resources/js/update.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/year.js":
+/*!******************************!*\
+  !*** ./resources/js/year.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#year_id').change(function () {
+  console.log($(this).val());
+
+  if ($(this).val() != '') {
+    if ($(this).val() == 1) {
+      $('#warning').removeClass('d-none');
+      $('#warning2').addClass('d-none');
+    } else {
+      $('#warning2').removeClass('d-none');
+      $('#warning').addClass('d-none');
+    }
+  } else {
+    $('#warning2').addClass('d-none');
+    $('#warning').addClass('d-none');
+  }
+});
 
 /***/ }),
 

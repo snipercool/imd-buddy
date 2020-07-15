@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group text-left">
     <label for="inputState">
         {{ Form::label($label, $placeholder ) }}
     </label>

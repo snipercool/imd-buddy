@@ -33,4 +33,7 @@ return [
     'warningnobuddy'=> 'Best look for a buddy',
     'warningbuddy'  => 'Better be a buddy for the freshmen',
     'emailError'    => 'This is not a school email address!',
+    'remember'      => 'Remember me',
+    'forgot'        => 'Forgot your password?',
+    'file'          => 'Choose file',
 ];
