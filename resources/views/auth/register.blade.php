@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <img class="avatar mb-2" src="../images/jpg/default.jpg" alt="default" width="150" height="150">
-                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror my-4" name="avatar" value="{{ old('avatar') }}" required>
+                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror my-4" name="avatar" value="{{ old('avatar') }}">
 
                 @error('avatar')
                 <span class="invalid-feedback" role="alert">
