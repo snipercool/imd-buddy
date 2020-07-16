@@ -31,10 +31,16 @@ class HomeController extends Controller
            $data =  User::all();
         }
         if (Auth::user()) {
-            $data = User::all()->except(Auth::id());
+            if (Auth::user()->buddy == 1) {
+                $data = User::where('buddy', 0)->get();
+            }
+            else {
+                $data = User::where('buddy', 1)->get();
+            }
         }
 
         //all user tags
+        $tags = [];
         $user = Auth::user();
         $skills = DB::table('user_tags')
             ->where('user_id', $user->id)
@@ -48,6 +54,6 @@ class HomeController extends Controller
         foreach ($skills as $tag => $value) {
             $tags[] = TagModel::where('id', $value)->first();
         }
-        return view('home', compact('data', 'tags'));
+        return view('home')->with(['data' => $data, 'tags' => $tags]);
     }
 }

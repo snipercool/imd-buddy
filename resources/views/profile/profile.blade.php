@@ -3,7 +3,8 @@
 @include('partials.navbar')
 
 @section('content')
-<div class="col-md-10 mr-3 mt-5" style="margin-left: 7rem; max-width: 900px;">
+<div class="col-md-10 row profileCard mr-3">
+<div class="col-md-7 mr-3 mt-5">
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -23,7 +24,7 @@
                         @endif
                         @if(Session::has('error'))
                         <div id="errorImage" class="my-2 mx-0 w-75 alert alert-danger">
-                            {{__('profile.imageError')}}
+                            {{__('errors.imageError')}}
                         </div>
                         @endif
                         
@@ -153,5 +154,47 @@
             </div>
         </div>
     </div>
+</div>
+<div class="col-md-4 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-primary">Buddy:</h3>
+                @if(!Auth::user()->buddy()->count())
+                    <div class="alert alert-info" role="alert">
+                        {{__('app.noBuddyYet')}}
+                    </div>
+                @if(!Auth::user()->buddyRequests()->count())
+                    <div class="alert alert-info" role="alert">
+                        {{__('app.noRequest')}}
+                    </div>
+                @else
+                    <div class="alert alert-info" role="alert">
+                        {{__('app.request')}} <strong>{{Auth::user()->buddyRequests()->first()->name}} {{Auth::user()->buddyRequests()->first()->surname}}</strong>
+                        <form action="{{ route('userprofile',  app()->getLocale()) }}">
+                        <input type="hidden" name="name" value="{{Auth::user()->buddyRequests()->first()->name}}">
+                        <input type="hidden" name="surname" value="{{Auth::user()->buddyRequests()->first()->surname}}">
+                        <button type="submit" class="btn btn-primary">{{__('profile.goProfile')}}</button>
+                        </form>
+                        <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                        <a href="{{ route('buddyrefuse', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                    </div>
+                @endif
+                @else
+                <div class="row">
+                <div class="rounded-circle overflow-hidden d-inline-block" style="width: 40px; height: 40px; background-image: url({{Auth::user()->buddy()->first()->avatar}}); background-size:cover;">
+                </div>
+                <p class="text-dark ml-1 w-75 font-weight-bold">{{Auth::user()->buddy()->first()->name}} </br> {{Auth::user()->buddy()->first()->surname}} </p>
+                </div>
+                <form action="{{ route('userprofile',  app()->getLocale()) }}">
+                <input type="hidden" name="name" value="{{Auth::user()->buddy()->first()->name}}">
+                <input type="hidden" name="surname" value="{{Auth::user()->buddy()->first()->surname}}">
+                <button type="submit" class="btn btn-primary">{{__('profile.goProfile')}}</button>
+                <a href="{{ route('deletebuddy', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-danger my-2">{{__('app.acceptRequest')}}</a>
+                </form>
+                @endif
+            
+        </div>
+    </div>
+</div>
 </div>
 @endsection

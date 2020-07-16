@@ -22,12 +22,8 @@ return [
     'joined'        => 'Gejoined op',
     'counttag'      => 'Kies ten minste 5 tags',
     'image'         => 'Foto is gewijzigd',
-    'imageError'    => 'Er is iets mis gegaan',
-    'CurrentError'  => 'Dit is niet jouw huidig wachtwoord.',
-    'SameError'     => 'Huidig en nieuw wachtwoord mogen niet overeenkomen.',
-    'NewSameError'  => 'Nieuw wachtwoord en bevestiging komen niet overeen.',
-    'changedPass'   => 'Wachtwoord verandert',
     'goProfile'     => 'Ga naar profiel',
+    'changedPass'   => 'Wachtwoord verandert',
     'notenoughtags' => 'Je hebt nog niet genoeg eigenschappen.',
 
 ];

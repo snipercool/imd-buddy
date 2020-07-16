@@ -28,6 +28,7 @@ class ProfileController extends Controller
         $created =  $s;
 
         //all user tags
+        $tags = [];
         $data = DB::table('user_tags')
             ->where('user_id', $user->id)
             ->get()
@@ -180,10 +181,20 @@ class ProfileController extends Controller
         unset($s[1]);
         $s = implode(" ", $s);
         $created =  $s;
-
+        $tags = [];
+        $skills = DB::table('user_tags')->where('user_id', $user->id)->get()
+                    ->map(function ($tags) {
+                        return [
+                            'id' => $tags->id,
+                            'value' => $tags->tag_id,
+                        ];
+                    });
+        foreach ($skills as $tag => $value){
+            $tags[] = Db::table('tags')->where('id', $value)->first();
+        }
         if (!$user) {
             abort(404);
         }
-        return view('profile.user')->with(['user' => $user, 'created' => $created]);
+        return view('profile.user')->with(['user' => $user, 'created' => $created, 'tags' => $tags]);
     }
 }

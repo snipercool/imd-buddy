@@ -32,4 +32,12 @@ return [
     'alreadyBuddy'  => 'This user has already a buddy',
     'noBuddyYet'    => 'This user has no buddy "yet"',
     'userbuddy'     => 'This user is a buddy with',
+    'noRequest'     => 'You have no requests',
+    'request'       => 'You have a request from',
+    'pending'       => 'Pending buddy request',
+    'acceptRequest' => 'Accept Request',
+    'requestSuccess'=> 'Request has been send',
+    'acceptSuccess' => 'Request accepted. Good job finding a buddy!',
+    'yourBuddy'     => 'This is your buddy',
+    'refused'       => 'Request has been refused',
 ];

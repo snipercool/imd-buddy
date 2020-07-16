@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuddyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\User;
@@ -32,11 +33,12 @@ Route::group([  'prefix' => '{locale}',
 
     Auth::routes();
 
+    Route::get('/search', 'SearchController@getResults')->name('search');
+
+    //profileRoutes
     Route::get('/profile', 'ProfileController@profile')->middleware('auth')->name('profile');
 
     Route::get('/updatepassword', 'ProfileController@PasswordPage')->middleware('auth')->name('updatepassword');
-
-    Route::get('/search', 'SearchController@getResults')->name('search');
 
     Route::post('/updatepassword', 'ProfileController@updatePassword')->name('updatepassword');
 
@@ -44,7 +46,15 @@ Route::group([  'prefix' => '{locale}',
 
     Route::post('/profile', 'ProfileController@update')->name('profile');
 
-    Route::get('/user', 'ProfileController@userProfile')->name('userprofile');
+    //buddyRoutes
+    Route::get('/buddy', 'BuddyController@index')->middleware('auth')->name('buddy');
+
+    Route::get('/buddy/add/{name}-{surname}', 'BuddyController@getAdd')->middleware('auth')->name('buddyadd');
+
+    Route::get('/buddy/accept/{name}-{surname}', 'BuddyController@acceptRequest')->middleware('auth')->name('buddyaccept');
+
+
+    Route::get('/user', 'ProfileController@userProfile')->middleware('auth')->name('userprofile');
 });
 
 
