@@ -35,4 +35,5 @@ return [
     'remember'      => 'Herinner mij',
     'forgot'        => 'Wachtwoord vergeten?',
     'file'          => 'Bestand kiezen',
+    'isin'          => 'Zit in'
 ];

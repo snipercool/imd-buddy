@@ -37,11 +37,15 @@ Route::group([  'prefix' => '{locale}',
 
     Route::get('/updatepassword', 'ProfileController@PasswordPage')->middleware('auth')->name('updatepassword');
 
+    Route::get('/search', 'SearchController@getResults')->name('search');
+
     Route::post('/updatepassword', 'ProfileController@updatePassword')->name('updatepassword');
 
     Route::post('/updateimage', 'ProfileController@UpdateImage')->name('updateimage');
 
     Route::post('/profile', 'ProfileController@update')->name('profile');
+
+    Route::get('/user', 'ProfileController@userProfile')->name('userprofile');
 });
 
 

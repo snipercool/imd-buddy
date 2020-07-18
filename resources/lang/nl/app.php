@@ -24,4 +24,9 @@ return [
     'skills'        => 'Je hebt minstens 5 features nodig.',
     'hi'            => 'Hey',
     'allusers'      => 'Dit zijn alle gebruikers',
+    'search'        => 'Zoek naar een buddy',
+    'searchError'   => 'Vul het zoekveld in met ten minste een voornaam',
+    'results'       => 'Resultaten',
+    'no_users'      => 'Geen buddies gevonden met deze naam',
+    'sendRequest'   => 'Stuur een buddy verzoek',
 ];
