@@ -21,29 +21,69 @@
                         </div>
                         <div>
                             {{__('auth.tags')}}:
-                            @php
-                            $skills = DB::table('user_tags')->where('user_id', $user->id)->get()
-                            ->map(function ($tags) {
-                            return [
-                            'id' => $tags->id,
-                            'value' => $tags->tag_id,
-                            ];
-                            });
-                            foreach ($skills as $tag => $value)
-                            $tags[] = Db::table('tags')->where('id', $value)->first();
-                            foreach ($tags as $tag){
-                            echo $tag->name . ', ';
-                            }
-                            @endphp
+                            @foreach ($tags as $tag)
+                            {{$tag->name}},
+                            @endforeach
                         </div>
                         <div>
-                            <a href="#" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                            @if(!$user->buddy()->count())
+                            @if(Auth::user()->hasbuddyRequestPending($user))
+                            <button type="button" class="btn btn-info text-white" disabled>{{__('app.pending')}}</button>
+                            @elseif (Auth::user()->hasbuddyRequestReceived($user))
+                            <a href="#" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                            @else
+                            @if(Session::has('RequestError'))
+                            <div id="success" class="my-2 mx-0 w-100 alert alert-danger">
+                                {{__('errors.wrongRequest')}}.
+                            </div>
+                            @elseif(Session::has('RequestSuccess'))
+                            <div id="success" class="my-2 mx-0 w-100 alert alert-success">
+                                {{__('app.requestSuccess')}}.
+                            </div>
+                            @endif
+
+                            @if(Session::has('AcceptError'))
+                            <div id="success" class="my-2 mx-0 w-100 alert alert-danger">
+                                {{__('errors.wrongAccept')}}.
+                            </div>
+                            @elseif(Session::has('AcceptSuccess'))
+                            <div id="success" class="my-2 mx-0 w-100 alert alert-success">
+                                {{__('app.acceptSuccess')}}
+                            </div>
+                            @endif
+                            @if(Auth::user()->hasbuddyRequestPending($user))
+                            <button type="button" class="btn btn-info text-white" disabled>{{__('app.pending')}}</button>
+                            @elseif (Auth::user()->hasbuddyRequestReceived($user))
+                            <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                            @else
+                            <a href="{{ route('buddyadd', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                            @endif
+                            @endif
+                            @elseif (Auth::user()->isBuddyWith($user)) 
+                            <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.yourBuddy')}}!</button>
+                            @elseif (Auth::user()->isBuddyWith($user)) 
+                            <button type="button" class="btn btn-secondary text-white text-left" disabled>{{__('app.refused')}}!</button>
+                            @else
+                            <button type="button" class="btn btn-secondary" disabled>{{__('app.alreadyBuddy')}}</button>
+                            @endif
                         </div>
                     </div>
                     <div class="text-center text-sm-right">
                         <div class="text-muted"><small>{{__('profile.joined')}} {{$created}}</small></div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <h4 class="text-primary">{{$user->name}}&lpar;'s&rpar; buddy:</h4>
+                @if(!$user->buddy()->count())
+                <div class="alert alert-info w-50" role="alert">
+                    {{__('app.noBuddyYet')}}
+                </div>
+                @else
+                <div class="alert alert-info w-50" role="alert">
+                    {{__('app.userbuddy')}} {{$user->buddy()->first()->name}} {{$user->buddy()->first()->surname}}
+                </div>
+                @endif
             </div>
         </div>
     </div>

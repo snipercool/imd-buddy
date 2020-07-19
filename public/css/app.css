@@ -231,10 +231,14 @@ main {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .side-left {
     display: block;
   }
+}
+
+.profileCard {
+  margin-left: 7rem !important;
 }
 
 /*!

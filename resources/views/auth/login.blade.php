@@ -9,12 +9,22 @@
         <p class="mb-3">{{ __('app.login') }}</p>
         <form method="POST" action="{{ route('login', app()->getLocale()) }}">
             @csrf
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
             @include('components.input',[
             'label' => 'email',
             'labelname' => __('auth.email'),
             'type' => 'email',
             'placeholder' => 'r-nummer@student.thomasmore.be',
             ])
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
             @include('components.input',[
             'label' => 'password',
             'labelname' => __('auth.password'),
@@ -53,7 +63,7 @@
         </div>
         <div class="mt-4">&copy; Interactive Multimedia Design, 2020</div>
     </div>
-    
+
 </div>
 
 @endsection

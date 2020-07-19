@@ -13,12 +13,12 @@
                         <div class="col-md-12 mb-2">
                         @if(Session::has('CurrentError'))
                         <div id="success" class="my-2 mx-0 alert alert-danger">
-                            {{__('profile.CurrentError')}}
+                            {{__('errors.CurrentError')}}
                         </div>
                         @endif
                         @if(Session::has('SameError'))
                         <div id="success" class="my-2 mx-0 alert alert-danger">
-                            {{__('profile.SameError')}}
+                            {{__('errors.SameError')}}
                         </div>
                         @endif
                             <div class="form-group">
@@ -29,7 +29,7 @@
                         <div class="col-md-12 mb-2">
                         @if(Session::has('NewSameError'))
                         <div id="success" class="my-2 mx-0 alert alert-danger">
-                            {{__('profile.NewSameError')}}
+                            {{__('errors.NewSameError')}}
                         </div>
                         @endif
                             <div class="form-group">

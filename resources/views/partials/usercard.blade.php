@@ -37,7 +37,23 @@
                 <input type="hidden" name="surname" value="{{$user->surname}}">
                 <button type="submit" class="btn btn-primary">{{__('profile.goProfile')}}</button>
                 </form>
-                <a href="#" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                @if(!$user->buddy()->count())
+                    @if(Auth::user()->hasbuddyRequestPending($user))
+                    <button type="button" class="btn btn-info text-white" disabled>{{__('app.pending')}}</button>
+                    @elseif (Auth::user()->hasbuddyRequestReceived($user))
+                    <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                    @elseif (Auth::user()->buddyOf($user))
+                    <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.alreadyBuddy')}}</a>
+                    @else
+                    <a href="{{ route('buddyadd', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
+                    @endif
+                @elseif (Auth::user()->isBuddyWith($user)) 
+                    <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.yourBuddy')}}!</button>
+                @elseif (!Auth::user()->buddy()->count()) 
+                    <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.youHaveBuddy')}}!</button>
+                @else
+                    <button type="button" class="btn btn-secondary text-left" disabled>{{__('app.alreadyBuddy')}}</button>
+                @endif
             </div>
             </div>
         </div>

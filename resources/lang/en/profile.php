@@ -22,11 +22,8 @@ return [
     'joined'        => 'Joined on',
     'counttag'      => 'Choose at least 5 tags',
     'image'         => 'Photo has been changed',
-    'imageError'    => 'Something went wrong',
-    'CurrentError'  => 'This is not your current password.',
-    'SameError'     => 'Current and New password can\'t match.',
-    'NewSameError'  => 'New Password and Confirm does not match.',
     'changedPass'   => 'Password changed.',
     'goProfile'     => 'Go to profile',
-    'loves'         => 'Loves',
+    'notenoughtags' => 'You don\'t have enough tags yet.',
+
 ];
