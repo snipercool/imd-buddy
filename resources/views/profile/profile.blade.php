@@ -175,8 +175,8 @@
                         <input type="hidden" name="surname" value="{{Auth::user()->buddyRequests()->first()->surname}}">
                         <button type="submit" class="btn btn-primary">{{__('profile.goProfile')}}</button>
                         </form>
-                        <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
-                        <a href="{{ route('buddyrefuse', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                        <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => Auth::user()->buddyRequests()->first()->name, 'surname' => Auth::user()->buddyRequests()->first()->surname]) }}" class="btn btn-success my-2">{{__('app.acceptRequest')}}</a>
+                        <a href="{{ route('buddyrefuse', ['locale' => app()->getLocale(), 'name' => Auth::user()->buddyRequests()->first()->name, 'surname' => Auth::user()->buddyRequests()->first()->surname]) }}" class="btn btn-danger my-2">{{__('app.refuseRequest')}}</a>
                     </div>
                 @endif
                 @else
@@ -189,7 +189,7 @@
                 <input type="hidden" name="name" value="{{Auth::user()->buddy()->first()->name}}">
                 <input type="hidden" name="surname" value="{{Auth::user()->buddy()->first()->surname}}">
                 <button type="submit" class="btn btn-primary">{{__('profile.goProfile')}}</button>
-                <a href="{{ route('deletebuddy', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-danger my-2">{{__('app.acceptRequest')}}</a>
+                <a href="{{ route('deletebuddy', ['locale' => app()->getLocale(), 'name' => Auth::user()->buddy()->first()->name, 'surname' => Auth::user()->buddy()->first()->surname]) }}" class="btn btn-danger my-2">{{__('app.deleteBuddy')}}</a>
                 </form>
                 @endif
             
