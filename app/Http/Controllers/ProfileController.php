@@ -85,7 +85,7 @@ class ProfileController extends Controller
         $check = '';
 
 
-        if (request()->hasFile('avatar')) {
+        if (request()->hasFile('avatar') && request('avatar') != null) {
             if (Str::contains($filetype[1], ['jpg', 'gif', 'png', 'jpeg'])) {
                 $avatar = request()->file('avatar')->getClientOriginalName();
                 request()->file('avatar')->storeAs('uploads', Auth::user()->id . '/' . $avatar, '');
@@ -101,23 +101,23 @@ class ProfileController extends Controller
     protected function update()
     {
 
-        if (request()->has('name')) {
+        if (request('name') != null) {
             User::where('id', Auth::user()->id)->update(['name' => request('name')]);
         }
-        if (request()->has('surname')) {
+        if (request('surname') != null) {
             User::where('id', Auth::user()->id)->update(['surname' => request('surname')]);
         }
-        if (request()->has('email')) {
+        if (request('email') != null) {
             User::where('id', Auth::user()->id)->update(['email' => request('email')]);
         }
-        if (request()->has('year')) {
+        if (request('year') != null) {
             User::where('id', Auth::user()->id)->update(['year' => request('year')]);
         }
-        if (request()->has('buddy')) {
+        if (request('buddy') != null) {
             User::where('id', Auth::user()->id)->update(['buddy' => request('buddy  ')]);
         }
 
-        if (request()->has('types')) {
+        if (request('types') != null) {
             //processing skillsArray
             $RawSkillsArray = request('types');
             $RawSkillsArray = explode(', ', $RawSkillsArray);
