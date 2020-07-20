@@ -30,41 +30,23 @@
                             @if(Auth::user()->hasbuddyRequestPending($user))
                             <button type="button" class="btn btn-info text-white" disabled>{{__('app.pending')}}</button>
                             @elseif (Auth::user()->hasbuddyRequestReceived($user))
-                            <a href="#" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
-                            @else
-                            @if(Session::has('RequestError'))
-                            <div id="success" class="my-2 mx-0 w-100 alert alert-danger">
-                                {{__('errors.wrongRequest')}}.
-                            </div>
-                            @elseif(Session::has('RequestSuccess'))
-                            <div id="success" class="my-2 mx-0 w-100 alert alert-success">
-                                {{__('app.requestSuccess')}}.
-                            </div>
-                            @endif
-
-                            @if(Session::has('AcceptError'))
-                            <div id="success" class="my-2 mx-0 w-100 alert alert-danger">
-                                {{__('errors.wrongAccept')}}.
-                            </div>
-                            @elseif(Session::has('AcceptSuccess'))
-                            <div id="success" class="my-2 mx-0 w-100 alert alert-success">
-                                {{__('app.acceptSuccess')}}
-                            </div>
-                            @endif
-                            @if(Auth::user()->hasbuddyRequestPending($user))
-                            <button type="button" class="btn btn-info text-white" disabled>{{__('app.pending')}}</button>
-                            @elseif (Auth::user()->hasbuddyRequestReceived($user))
-                            <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.acceptRequest')}}</a>
+                            <a href="{{ route('buddyaccept', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-success my-2">{{__('app.acceptRequest')}}</a>
+                            <a href="{{ route('buddyrefuse', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-danger my-2">{{__('app.refuseRequest')}}</a>
+                            @elseif (Auth::user()->buddyRefused($user))
+                            <button type="button" class="btn btn-info text-white" disabled>{{__('app.refused')}}</button>
+                            @elseif ($user->buddyRefused(Auth::user()))
+                            <button type="button" class="btn btn-info text-white" disabled>{{__('app.youRefused')}}</button>
                             @else
                             <a href="{{ route('buddyadd', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
                             @endif
-                            @endif
-                            @elseif (Auth::user()->isBuddyWith($user)) 
+                            @elseif (Auth::user()->isBuddyWith($user))
                             <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.yourBuddy')}}!</button>
-                            @elseif (Auth::user()->isBuddyWith($user)) 
-                            <button type="button" class="btn btn-secondary text-white text-left" disabled>{{__('app.refused')}}!</button>
+                            @elseif (!Auth::user()->buddy()->count())
+                            <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.alreadyBuddy')}}!</button>
+                            @elseif (Auth::user()->noMoreBuddy()->count())
+                            <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.noMoreBuddy')}}!</button>
                             @else
-                            <button type="button" class="btn btn-secondary" disabled>{{__('app.alreadyBuddy')}}</button>
+                            <button type="button" class="btn btn-secondary text-left" disabled>{{__('app.alreadyBuddy')}}</button>
                             @endif
                         </div>
                     </div>

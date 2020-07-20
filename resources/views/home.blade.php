@@ -13,8 +13,16 @@
     {{__('errors.wrongRequest')}}.
 </div>
 @elseif(Session::has('RequestSuccess'))
-<div id="success" class="my-2 mx-0 w-100 alert alert-success">
+<div id="success" class="my-2 mx-0 w-50 alert alert-success">
     {{__('app.requestSuccess')}}.
+</div>
+@elseif(Session::has('AcceptSuccess'))
+<div id="success" class="my-2 mx-0 w-50 alert alert-success">
+    {{__('app.acceptSuccess')}}
+</div>
+@elseif(Session::has('RefuseSuccess'))
+<div id="success" class="my-2 mx-0 w-50 alert alert-success">
+    {{__('app.refuseSuccess')}}.
 </div>
 @endif
 @if(Auth::guest())

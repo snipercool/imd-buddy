@@ -41,8 +41,34 @@ class BuddyController extends Controller
 
         Auth::user()->acceptRequest($user);
 
-        Auth::user()->deleteOtherRequests($user);
+        Auth::user()->deleteOtherRequests(Auth::user());
 
         return redirect()->back()->with('AcceptSuccess', 'done!');
+    }
+
+    public function refuseRequest($locale, $name, $surname)
+    {
+        $user = User::where('name', $name)->where('surname', $surname)->first();
+
+        if (!Auth::user()->hasbuddyRequestReceived($user)) {
+            return redirect(app()->getLocale() . '/');
+        }
+
+        Auth::user()->refusedRequest($user);
+
+        return redirect()->back()->with('RefuseSuccess', 'done!');
+    }
+
+    public function deleteBuddy($locale, $name, $surname)
+    {
+        $user = User::where('name', $name)->where('surname', $surname)->first();
+
+        if (!Auth::user()->isBuddyWith($user)) {
+            return redirect()->back()->with('DeleteError', 'Error!');
+        }
+
+        Auth::user()->deleteBuddy($user);
+
+        return redirect()->back()->with('DeleteSuccess', 'done!');
     }
 }

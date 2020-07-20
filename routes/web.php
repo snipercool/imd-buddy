@@ -54,6 +54,10 @@ Route::group([  'prefix' => '{locale}',
 
     Route::get('/buddy/accept/{name}-{surname}', 'BuddyController@acceptRequest')->middleware('auth')->name('buddyaccept');
 
+    Route::get('/buddy/refuse/{name}-{surname}', 'BuddyController@refuseRequest')->middleware('auth')->name('buddyrefuse');
+
+    Route::get('/buddy/delete/{name}-{surname}', 'BuddyController@deleteBuddy')->middleware('auth')->name('deletebuddy');
+
 
     Route::get('/user', 'ProfileController@userProfile')->middleware('auth')->name('userprofile');
 });

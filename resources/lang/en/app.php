@@ -38,6 +38,10 @@ return [
     'acceptRequest' => 'Accept Request',
     'requestSuccess'=> 'Request has been send',
     'acceptSuccess' => 'Request accepted. Good job finding a buddy!',
+    'refuseSuccess' => 'Request refused. Maybe next time',
     'yourBuddy'     => 'This is your buddy',
     'refused'       => 'Request has been refused',
+    'youRefused'    => 'You refused the request',
+    'deleteBuddy'   => 'Delete buddy',
+    'noMoreBuddy'   => 'You are no longer buddies',
 ];
