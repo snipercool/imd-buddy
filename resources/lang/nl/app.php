@@ -40,9 +40,12 @@ return [
     'requestSuccess'=> 'Verzoek is verstuurd',
     'acceptSuccess' => 'Verzoek geaccepteerd. goed werk om een buddy te vinden!',
     'refuseSuccess' => 'Verzoek geweigerd. Spijtig volgende keer misschien',
-    'yourbuddy'     => 'Dit is jouw buddy',
+    'yourBuddy'     => 'Dit is jouw buddy',
     'refused'       => 'verzoek is geweigerd geweest',
     'youRefused'    => 'Jij hebt het verzoek geweigerd',
     'deleteBuddy'   => 'Verwijder vriend',
     'noMoreBuddy'   => 'Jullie zijn geen vrienden meer',
+    'youHaveBuddy'  => 'Jij hebt al een vriend',
+    'talkwith'      => 'Chat met',
+    'message'       => 'Bericht...'
 ];

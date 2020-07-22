@@ -41,6 +41,8 @@ Route::group([  'prefix' => '{locale}',
 
     Route::get('/updatepassword', 'ProfileController@PasswordPage')->middleware('auth')->name('updatepassword');
 
+    Route::get('/user', 'ProfileController@userProfile')->middleware('auth')->name('userprofile');
+
     Route::post('/updatepassword', 'ProfileController@updatePassword')->name('updatepassword');
 
     Route::post('/updateimage', 'ProfileController@UpdateImage')->name('updateimage');
@@ -59,7 +61,7 @@ Route::group([  'prefix' => '{locale}',
     Route::get('/buddy/delete/{name}-{surname}', 'BuddyController@deleteBuddy')->middleware('auth')->name('deletebuddy');
 
 
-    Route::get('/user', 'ProfileController@userProfile')->middleware('auth')->name('userprofile');
+    
 });
 
 

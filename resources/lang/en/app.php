@@ -44,4 +44,7 @@ return [
     'youRefused'    => 'You refused the request',
     'deleteBuddy'   => 'Delete buddy',
     'noMoreBuddy'   => 'You are no longer buddies',
+    'youHaveBuddy'  => 'You already have a buddy',
+    'talkwith'      => 'Talk with',
+    'message'       => 'Message...'
 ];

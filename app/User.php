@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -87,9 +88,9 @@ class User extends Authenticatable
         return $this->buddyOfUser()->wherePivot('deleted', true)->wherePivot('deleted', true)->get()->merge($this->buddyOf()->wherePivot('deleted', true)->wherePivot('deleted', true)->get());
     }
 
-    public function hasbuddy()
+    public function HasBuddy()
     {
-        return $this->buddyOf()->wherePivot('accepted', true)->wherePivot('refused', false)->get();
+        return $this->buddyOf()->wherePivot('accepted', true)->get();
     }
 
     public function acceptRequest(User $user)
@@ -100,6 +101,12 @@ class User extends Authenticatable
             'tries' => 1,
         ]);
     }
+
+    public function isBuddyWith(User $user)
+    {
+        return (bool) $this->buddy()->where('id', $user->id)->count(); 
+    }
+
     public function refusedRequest(User $user)
     {
         $this->buddyRequests()->where('id', $user->id)->first()->pivot->update([
@@ -109,9 +116,14 @@ class User extends Authenticatable
         ]);
     }
 
+    public function allBuddyRequests()
+    {
+        return $this->buddyOfUser()->wherePivot('accepted', false)->wherePivot('refused', false)->wherePivot('deleted', null)->get();
+    }
+
     public function deleteOtherRequests(User $user)
     {
-        $this->buddyRequests()->where('id', $user->id)->where('accepted', 0)->detach($user->id);
+        $this->allBuddyRequests()->where('id', $user->id)->detach();
     }
 
     public function deleteBuddy(User $user)
@@ -126,12 +138,6 @@ class User extends Authenticatable
     public function buddyRefused(User $user)
     {
         return (bool) $this->buddyRequestsRefused()->where('id', $user->id)->count();
-    }
-
-
-    public function isBuddyWith(User $user)
-    {
-        return (bool) $this->buddy()->where('id', $user->id)->count(); 
     }
 
     public function noMoreBuddy(User $user)

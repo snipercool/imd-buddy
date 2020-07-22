@@ -241,6 +241,10 @@ main {
   margin-left: 7rem !important;
 }
 
+.minh {
+  min-height: 70vh;
+}
+
 /*!
  * Bootstrap v5.0.0-alpha1 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

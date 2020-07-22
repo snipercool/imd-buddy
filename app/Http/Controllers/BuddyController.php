@@ -5,13 +5,34 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BuddyController extends Controller
 {
     public function index()
     {
+        //check if user has buddy
+        $user = Auth::user()->id;
         
-        return view('buddy.buddy');
+        $buddy = DB::table('buddy')
+        ->join('users', 'buddy.buddy_id', '=', 'users.id')
+        ->where('users.id','<>',$user)          
+        ->where('buddy.accepted', true)                       
+        ->where(function($query) use ($user)
+                   {
+                       $query->where('user_id', $user)
+                             ->orWhere('buddy_id', $user);
+                   })
+       
+         ->get();
+
+        if ($buddy->isEmpty() ) {
+            return redirect(app()->getLocale() . '/');
+        }
+        else {
+            return view('buddy.buddy')->with('buddy', $buddy);
+        }
+       
     }
 
     public function getAdd($locale, $name, $surname)
@@ -41,7 +62,10 @@ class BuddyController extends Controller
 
         Auth::user()->acceptRequest($user);
 
-        Auth::user()->deleteOtherRequests(Auth::user());
+        $allYourrequests = DB::table('buddy')->where('accepted', '=', false)->where(function ($q)
+        {
+            $q->where('user_id', Auth::user()->id)->orWhere('buddy_id', Auth::user()->id);
+        })->delete();
 
         return redirect()->back()->with('AcceptSuccess', 'done!');
     }

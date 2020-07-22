@@ -14,20 +14,11 @@
             </div>
             <div class="row">
                 <div class="col-md-10 mx-auto">
-                    @php
-                    $skills = DB::table('user_tags')->where('user_id', $user->id)->get()
-                    ->map(function ($tags) {
-                    return [
-                    'id' => $tags->id,
-                    'value' => $tags->tag_id,
-                    ];
-                    });
-                    foreach ($skills as $tag => $value)
-                    $tags[] = Db::table('tags')->where('id', $value)->first();
-                    foreach ($tags as $tag){
-                    echo $tag->name . ', ';
-                    }
-                    @endphp
+                   
+                    @foreach ($tags as $t)
+                     {{$t->name . ', '}}
+                    @endforeach
+                    
                 </div>
             </div>
             <div class="row mt-2">
@@ -49,13 +40,14 @@
                     <button type="button" class="btn btn-info text-white" disabled>{{__('app.youRefused')}}</button>
                     @elseif (Auth::user()->noMoreBuddy($user)) 
                     <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.noMoreBuddy')}}!</button>
+                    @elseif (Auth::user()->HasBuddy()) 
+                    <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.youHaveBuddy')}}</button>
                     @else
                     <a href="{{ route('buddyadd', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
                     @endif
                 @elseif (Auth::user()->isBuddyWith($user)) 
                     <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.yourBuddy')}}!</button>
-                @elseif (!Auth::user()->buddy()->count()) 
-                    <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.alreadyBuddy')}}!</button>
+
                 @elseif (Auth::user()->noMoreBuddy($user)) 
                     <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.noMoreBuddy')}}!</button>
                 @else
