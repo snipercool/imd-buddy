@@ -47,5 +47,5 @@ return [
     'noMoreBuddy'   => 'Jullie zijn geen vrienden meer',
     'youHaveBuddy'  => 'Jij hebt al een vriend',
     'talkwith'      => 'Chat met',
-    'message'       => 'Bericht...'
+    'message'       => 'Type uw bericht hier...'
 ];

@@ -46,5 +46,5 @@ return [
     'noMoreBuddy'   => 'You are no longer buddies',
     'youHaveBuddy'  => 'You already have a buddy',
     'talkwith'      => 'Talk with',
-    'message'       => 'Message...'
+    'message'       => 'Type your message here...'
 ];

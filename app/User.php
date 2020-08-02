@@ -50,17 +50,17 @@ class User extends Authenticatable
 
     public function buddy()
     {
-        return $this->buddyOfUser()->wherePivot('accepted', true)->wherePivot('refused', false)->wherePivot('deleted', null)->get()->merge($this->buddyOf()->wherePivot('accepted', true)->wherePivot('refused', false)->wherePivot('deleted', null)->get());
+        return $this->buddyOfUser()->wherePivot('accepted', true)->wherePivot('refused', false)->wherePivot('deleted', 0)->get()->merge($this->buddyOf()->wherePivot('accepted', true)->wherePivot('refused', false)->wherePivot('deleted', 0)->get());
     }
 
     public function buddyRequests()
     {
-        return $this->buddyOfUser()->wherePivot('accepted', false)->wherePivot('refused', false)->wherePivot('deleted', null)->get();
+        return $this->buddyOfUser()->wherePivot('accepted', false)->wherePivot('refused', false)->wherePivot('deleted', 0)->get();
     }
 
     public function buddyRequestsPending()
     {
-        return $this->buddyOf()->wherePivot('accepted', false)->wherePivot('refused', false)->wherePivot('deleted', null)->get();
+        return $this->buddyOf()->wherePivot('accepted', false)->wherePivot('refused', false)->wherePivot('deleted', 0)->get();
     }
 
     public function buddyRequestsRefused()
@@ -104,7 +104,7 @@ class User extends Authenticatable
 
     public function isBuddyWith(User $user)
     {
-        return (bool) $this->buddy()->where('id', $user->id)->count(); 
+        return (bool) $this->buddy()->where('id', $user->id)->count();
     }
 
     public function refusedRequest(User $user)
@@ -142,6 +142,18 @@ class User extends Authenticatable
 
     public function noMoreBuddy(User $user)
     {
-        return (bool) $this->buddyDeleted()->where('id', $user->id)->count(); 
+        return (bool) $this->buddyDeleted()->where('id', $user->id)->count();
+    }
+
+    //chat
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
+    public function addmessages($message)
+    {
+       return $this->messages()->attach($message);
     }
 }
