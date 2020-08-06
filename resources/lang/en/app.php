@@ -46,5 +46,9 @@ return [
     'noMoreBuddy'   => 'You are no longer buddies',
     'youHaveBuddy'  => 'You already have a buddy',
     'talkwith'      => 'Talk with',
-    'message'       => 'Type your message here...'
+    'message'       => 'Type your message here...',
+    'country'       => 'Country',
+    'confirmed'     => 'Confirmed',
+    'dead'          => 'Deaths',
+    'recovered'     => 'Recovered',
 ];
