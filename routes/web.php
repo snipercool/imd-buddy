@@ -60,8 +60,11 @@ Route::group([  'prefix' => '{locale}',
 
     //chat
     Route::get('/buddy', 'BuddyController@index')->middleware('auth')->name('buddy');
-
     
 });
+
+Route::get('/messagefetch', 'BuddyController@fetchMessage')->name('messagefetch');
+
+Route::post('/messagesend', 'BuddyController@sendMessage')->middleware('auth')->name('messagesend');
 
 
