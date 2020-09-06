@@ -60,11 +60,18 @@ Route::group([  'prefix' => '{locale}',
 
     //chat
     Route::get('/buddy', 'BuddyController@index')->middleware('auth')->name('buddy');
+<<<<<<< HEAD
+=======
 
     //Corona update page
     Route::get('/corona', 'HomeController@corona')->name('corona');
 
+>>>>>>> develop
     
 });
+
+Route::get('/messagefetch', 'BuddyController@fetchMessage')->name('messagefetch');
+
+Route::post('/messagesend', 'BuddyController@sendMessage')->middleware('auth')->name('messagesend');
 
 

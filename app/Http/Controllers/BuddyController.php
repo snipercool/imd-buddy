@@ -85,21 +85,29 @@ class BuddyController extends Controller
 
     public function fetchMessage()
     {
-        return response()->json(\App\Message::with('user')->where('from_id', Auth::id())->orWhere('from_id', Auth::user()->buddy()->id)->oldest()->get());
+        //dd(Auth::id(), Auth::user()->buddy()->first()->id);
+        return response()->json(\App\Message::with('user')->where(function ($first){
+            $first->where('from_id', Auth::id())->where('to_id', Auth::user()->buddy()->first()->id);
+        })->orWhere(function ($second) {
+            $second->where('from_id', Auth::user()->buddy()->first()->id)
+            ->where('to_id', Auth::id());
+        })->oldest()->get());
     }
 
     public function sendMessage(Message $message)
     {
-        if (request('massage') != null) {
-            $addMesage = $message->create([
+        if (request('message') != null) {
+            $addMessage = $message->create([
                 'from_id' => Auth::id(),
-                'to_id' => Auth::user()->buddy()->id,
+                'to_id' => Auth::user()->buddy()->first()->id,
                 'message' => request('message')
             ]);
 
-            $addMesage = Message::where('id', $addMesage->id)->with('user')->first(); 
+            $addMessage = Message::where('id', $addMessage->id)->with('user')->first(); 
+                
+            event(new MessageSent($addMessage));
 
-            return $addMesage->toJson();
+            return $addMessage->toJson();
         }
         else {
             return redirect()->back()->with('noMessage', 'done!');

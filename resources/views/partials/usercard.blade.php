@@ -40,6 +40,7 @@
                     <button type="button" class="btn btn-info text-white" disabled>{{__('app.youRefused')}}</button>
                     @elseif (Auth::user()->noMoreBuddy($user)) 
                     <button type="button" class="btn btn-info text-white text-left" disabled>{{__('app.noMoreBuddy')}}!</button>
+                    @else
                     <a href="{{ route('buddyadd', ['locale' => app()->getLocale(), 'name' => $user->name, 'surname' => $user->surname]) }}" class="btn btn-primary my-2">{{__('app.sendRequest')}}</a>
                     @endif
                 @elseif (Auth::user()->isBuddyWith($user)) 
