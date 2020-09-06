@@ -56036,6 +56036,10 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9e42dfb56ee2466a5405b5481d951331e6026253
 /***/ "./resources/js/components/ChatComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/ChatComponent.vue ***!
@@ -56102,6 +56106,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9e42dfb56ee2466a5405b5481d951331e6026253
 /***/ "./resources/js/corona.js":
 /*!********************************!*\
   !*** ./resources/js/corona.js ***!
@@ -56167,6 +56175,7 @@ $.ajax(settings).done(function (response) {
     $countries.append("\n            <tr>\n                <th scope=\"row\">".concat(item.location, "</th>    \n                <td>").concat(item.confirmed, "</td>   \n                <td>").concat(item.dead, "</td>   \n                <td>").concat(item.recovered, "</td>   \n            </tr>\n        "));
   }
 });
+>>>>>>> develop
 
 /***/ }),
 
