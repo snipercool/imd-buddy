@@ -55902,6 +55902,8 @@ __webpack_require__(/*! ./email */ "./resources/js/email.js");
 
 __webpack_require__(/*! ./update */ "./resources/js/update.js");
 
+__webpack_require__(/*! ./corona */ "./resources/js/corona.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 Vue.component('chat-component', _components_ChatComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -56034,6 +56036,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/components/ChatComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/ChatComponent.vue ***!
@@ -56100,6 +56103,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+=======
+/***/ "./resources/js/corona.js":
+/*!********************************!*\
+  !*** ./resources/js/corona.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var settings = {
+  "url": "https://www.trackcorona.live/api/countries",
+  "type": "GET",
+  "timeout": 0
+};
+var $countries = $('#corona');
+$.ajax(settings).done(function (response) {
+  var array = [];
+
+  for (var i = 0; i < response.data.length; i++) {
+    switch (response.data[i].location) {
+      case 'Belgium':
+        array.push(response.data[i]);
+        break;
+
+      case 'France':
+        array.push(response.data[i]);
+        break;
+
+      case 'Italy':
+        array.push(response.data[i]);
+        break;
+
+      case 'Germany':
+        array.push(response.data[i]);
+        break;
+
+      case 'Netherlands':
+        array.push(response.data[i]);
+        break;
+
+      case 'United Kingdom':
+        array.push(response.data[i]);
+        break;
+
+      case 'Luxembourg':
+        array.push(response.data[i]);
+        break;
+
+      case 'Spain':
+        array.push(response.data[i]);
+        break;
+
+      case 'Portugal':
+        array.push(response.data[i]);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  array.forEach(showCountry);
+
+  function showCountry(item, index) {
+    $countries.append("\n            <tr>\n                <th scope=\"row\">".concat(item.location, "</th>    \n                <td>").concat(item.confirmed, "</td>   \n                <td>").concat(item.dead, "</td>   \n                <td>").concat(item.recovered, "</td>   \n            </tr>\n        "));
+  }
+});
+>>>>>>> develop
 
 /***/ }),
 

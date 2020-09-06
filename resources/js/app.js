@@ -16,6 +16,8 @@ require('./email');
 
 require('./update');
 
+require('./corona');
+
 window.Vue = require('vue');
 
 import ChatComponent from './components/ChatComponent.vue';
