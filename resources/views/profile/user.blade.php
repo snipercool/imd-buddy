@@ -26,7 +26,7 @@
                             @endforeach
                         </div>
                         <div>
-                            @if(!$user->buddy()->count())
+                        @if(!$user->buddy()->count())
                             @if(Auth::user()->hasbuddyRequestPending($user))
                             <button type="button" class="btn btn-info text-white" disabled>{{__('app.pending')}}</button>
                             @elseif (Auth::user()->hasbuddyRequestReceived($user))

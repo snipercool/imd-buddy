@@ -67,4 +67,8 @@ Route::group([  'prefix' => '{locale}',
     
 });
 
+Route::get('/messagefetch', 'BuddyController@fetchMessage')->name('messagefetch');
+
+Route::post('/messagesend', 'BuddyController@sendMessage')->middleware('auth')->name('messagesend');
+
 
