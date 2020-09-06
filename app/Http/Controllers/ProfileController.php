@@ -28,6 +28,7 @@ class ProfileController extends Controller
         $created =  $s;
 
         //all user tags
+        $tags = [];
         $data = DB::table('user_tags')
             ->where('user_id', $user->id)
             ->get()
@@ -84,7 +85,7 @@ class ProfileController extends Controller
         $check = '';
 
 
-        if (request()->hasFile('avatar')) {
+        if (request()->hasFile('avatar') && request('avatar') != null) {
             if (Str::contains($filetype[1], ['jpg', 'gif', 'png', 'jpeg'])) {
                 $avatar = request()->file('avatar')->getClientOriginalName();
                 request()->file('avatar')->storeAs('uploads', Auth::user()->id . '/' . $avatar, '');
@@ -100,23 +101,23 @@ class ProfileController extends Controller
     protected function update()
     {
 
-        if (request()->has('name')) {
+        if (request('name') != null) {
             User::where('id', Auth::user()->id)->update(['name' => request('name')]);
         }
-        if (request()->has('surname')) {
+        if (request('surname') != null) {
             User::where('id', Auth::user()->id)->update(['surname' => request('surname')]);
         }
-        if (request()->has('email')) {
+        if (request('email') != null) {
             User::where('id', Auth::user()->id)->update(['email' => request('email')]);
         }
-        if (request()->has('year')) {
+        if (request('year') != null) {
             User::where('id', Auth::user()->id)->update(['year' => request('year')]);
         }
-        if (request()->has('buddy')) {
+        if (request('buddy') != null) {
             User::where('id', Auth::user()->id)->update(['buddy' => request('buddy  ')]);
         }
 
-        if (request()->has('types')) {
+        if (request('types') != null) {
             //processing skillsArray
             $RawSkillsArray = request('types');
             $RawSkillsArray = explode(', ', $RawSkillsArray);
@@ -180,10 +181,20 @@ class ProfileController extends Controller
         unset($s[1]);
         $s = implode(" ", $s);
         $created =  $s;
-
+        $tags = [];
+        $skills = DB::table('user_tags')->where('user_id', $user->id)->get()
+                    ->map(function ($tags) {
+                        return [
+                            'id' => $tags->id,
+                            'value' => $tags->tag_id,
+                        ];
+                    });
+        foreach ($skills as $tag => $value){
+            $tags[] = Db::table('tags')->where('id', $value)->first();
+        }
         if (!$user) {
             abort(404);
         }
-        return view('profile.user')->with(['user' => $user, 'created' => $created]);
+        return view('profile.user')->with(['user' => $user, 'created' => $created, 'tags' => $tags]);
     }
 }

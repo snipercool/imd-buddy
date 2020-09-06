@@ -53,9 +53,6 @@ class tagSeeder extends Seeder
                 'name'       => 'fitness',
             ],
             [
-                'name'       => 'javascript',
-            ],
-            [
                 'name'       => 'memelord',
             ],
             [
