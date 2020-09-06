@@ -47,12 +47,15 @@
                 <button type="submit" class="btn btn-primary w-50">
                     {{ __('app.login') }}
                 </button>
-
+            </div>
+            <div class="form-group row mb-0">
                 @if (Route::has('password.request'))
                 <a class="btn btn-link text-left px-0" href="{{ route('password.request', app()->getLocale()) }}">
                     {{ __('auth.forgot') }}
                 </a>
                 @endif
+            </div>
+            <div class="form-group row mb-0">
                 <a class="btn btn-primary" href="{{ route('register', app()->getLocale()) }}">{{__('auth.noaccount')}}</a>
             </div>
         </form>

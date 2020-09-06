@@ -50,8 +50,6 @@ Route::group([  'prefix' => '{locale}',
     Route::post('/profile', 'ProfileController@update')->name('profile');
 
     //buddyRoutes
-    Route::get('/buddy', 'BuddyController@index')->middleware('auth')->name('buddy');
-
     Route::get('/buddy/add/{name}-{surname}', 'BuddyController@getAdd')->middleware('auth')->name('buddyadd');
 
     Route::get('/buddy/accept/{name}-{surname}', 'BuddyController@acceptRequest')->middleware('auth')->name('buddyaccept');
@@ -60,6 +58,11 @@ Route::group([  'prefix' => '{locale}',
 
     Route::get('/buddy/delete/{name}-{surname}', 'BuddyController@deleteBuddy')->middleware('auth')->name('deletebuddy');
 
+    //chat
+    Route::get('/buddy', 'BuddyController@index')->middleware('auth')->name('buddy');
+
+    //Corona update page
+    Route::get('/corona', 'HomeController@corona')->name('corona');
 
     
 });

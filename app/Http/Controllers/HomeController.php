@@ -56,4 +56,12 @@ class HomeController extends Controller
         }
         return view('home')->with(['data' => $data, 'tags' => $tags]);
     }
+    public function corona()
+    {
+        $rUrl = 'https://www.trackcorona.live/get_latest';
+
+        $data = json_decode(file_get_contents($rUrl), true);
+        
+        return view('corona')->withData($data);
+    }
 }

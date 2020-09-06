@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/createtags', 'ApiController@createTags');
 Route::post('/autocomplete', 'ApiController@autocomplete');
+
+Route::get('/messagefetch', 'BuddyController@fetchMessage')->name('messagefetch');
+Route::middleware('auth:api')->group(function (){
+    Route::post('/messagesend', 'BuddyController@sendMessage')->name('messagesend');
+});
