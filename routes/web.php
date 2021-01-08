@@ -28,9 +28,9 @@ Route::group([  'prefix' => '{locale}',
             ], function()
 {
 
-    route::get('/', 'Homecontroller@index')->name('home');
+    route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/home', 'Homecontroller@index');
+    Route::get('/home', 'HomeController@index');
 
     Auth::routes();
 
