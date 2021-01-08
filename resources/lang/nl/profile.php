@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'change'        => 'Verander foto',
+    'change'        => 'Verand foto',
     'changepass'    => 'Verander wachtwoord',
     'currentpass'   => 'Huidig wachtwoord',
     'newpass'       => 'Nieuw wachtwoord',
